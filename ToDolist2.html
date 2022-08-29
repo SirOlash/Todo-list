@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        #show{
+         border-collapse:collapse; 
+         margin-top:20px; 
+         background-color: rgb(2, 2, 53); 
+         color: white; 
+         text-align: left;
+        } 
+        #InputBox{
+         width: 45%;
+         border: none;
+         outline: none; 
+         height: 25px;
+         background-color: rgb(197, 194, 194);
+        }
+     </style>
+
+</head>
+<body style="background-color: grey ;text-align: center;">
+
+    <h1 style="color: white;">To Do App</h1>
+    <input type="text" id="InputBox" placeholder="Type Some text, then click add">
+    <button onclick="add()" style="background-color: green;">ADD</button>
+
+    
+ <div style="justify-content: center; align-items:center;display:flex;">
+    <table border="1" width="50%" height="50%" id="show">
+        <tr>
+            <th>S/N</th>
+            <th>DESCRIPTION</th>
+            <th>ACTION</th>
+        </tr>
+    </table>
+ </div>
+</body>
+
+    <script>
+        ar=[]
+        let condition;
+        function add() {
+
+
+          let text=document.getElementById('InputBox').value 
+          if (text=='' ) {
+            alert('Box Cannot Be Empty')
+
+          }
+          else{
+            ar.push({description:text,done:false}) 
+          }
+
+
+        //   && text== show.innerHTML
+        
+          display() 
+        }
+
+        function display() {
+            show.innerHTML=''
+            show.innerHTML=`<table border="1" width="50%" height="50%" id="show" style="border-collapse:collapse; margin-top:20px;"> 
+                        <tr>
+                            <th>S/N</th>
+                            <th>DESCRIPTION</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </table>`
+
+        for (let index = 0; index < ar.length; index++) {
+            document.getElementById('show').innerHTML+=
+                `<tr ${ar[index].done? 'style="background-color: rgb(2, 2, 53);" ': 'style="background-color: pink;" '}> 
+                    <td>${index+1}</td>  
+                    <td>${ar[index].description}</td>  
+                    <td>${ar[index].done?'<i class="fa fa-check" style="color:green;"></i>' : '<i class="fa fa-times" style="text-align:center; color:red;"></i>'}</td>  
+                    <td><button onclick="check(${index})">${ar[index].done? 'undo' : 'check'}</button></td>  
+                </tr>`  
+            
+            }
+        }
+        function check(index) {
+           ar[index].done? ar[index].done=false: ar[index].done=true
+           display()
+        }
+
+    </script>
+
+</html>
